@@ -7,17 +7,27 @@ import { ModeToggle } from "./toggle-dark-mode";
 import { useTheme } from "next-themes";
 import PetLogoLight from "../../../public/pets-logo-light.png";
 import PetLogoDark from "../../../public/pets-logo-dark.png";
-import Image from "next/image";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./sheet";
+import { signIn } from "next-auth/react";
+import Image from "next/image";
 
 const Header = () => {
   const { theme } = useTheme();
+  const logoPet = !theme || theme === 'light' ? PetLogoLight : PetLogoDark
+
+  const loginClick = async () => {
+    await signIn();
+  };
 
   return (
     <Card className="flex justify-between rounded-[0px] px-7 py-4">
       <Sheet>
         <SheetTrigger asChild>
-          <Button size="icon" variant="outline">
+          <Button
+            onClick={() => console.log(theme)}
+            size="icon"
+            variant="outline"
+          >
             <MenuIcon />
           </Button>
         </SheetTrigger>
@@ -28,7 +38,11 @@ const Header = () => {
           </SheetHeader>
 
           <div className="mt-2 flex flex-col gap-2">
-            <Button variant="outline" className="w-full justify-start gap-2">
+            <Button
+              onClick={loginClick}
+              variant="outline"
+              className="w-full justify-start gap-2"
+            >
               <LogInIcon size={16} />
               Fazer Login
             </Button>
@@ -51,13 +65,9 @@ const Header = () => {
         </SheetContent>
       </Sheet>
 
-      <Image
-        src={theme === "light" ? PetLogoLight : PetLogoDark}
-        alt={"logo"}
-        width={50}
-        height={0}
-        className="max-h-[40px]"
-      />
+      <div>
+        <Image src={logoPet} alt={"pets-logo"} width={50} />
+      </div>
 
       <ModeToggle />
     </Card>
