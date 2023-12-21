@@ -1,6 +1,13 @@
 "use client";
 
-import { HomeIcon, LogInIcon, MenuIcon, PawPrint, Search } from "lucide-react";
+import {
+  HomeIcon,
+  LogInIcon,
+  LogOutIcon,
+  MenuIcon,
+  PawPrint,
+  Search,
+} from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
 import { ModeToggle } from "./toggle-dark-mode";
@@ -8,15 +15,22 @@ import { useTheme } from "next-themes";
 import PetLogoLight from "../../../public/pets-logo-light.png";
 import PetLogoDark from "../../../public/pets-logo-dark.png";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./sheet";
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { Separator } from "./separator";
+import { useEffect } from "react";
 
 const Header = () => {
+  const { status, data } = useSession();
   const { theme } = useTheme();
-  const logoPet = !theme || theme === 'light' ? PetLogoLight : PetLogoDark
 
   const loginClick = async () => {
     await signIn();
+  };
+
+  const logoutClick = async () => {
+    await signOut();
   };
 
   return (
@@ -38,14 +52,33 @@ const Header = () => {
           </SheetHeader>
 
           <div className="mt-2 flex flex-col gap-2">
-            <Button
-              onClick={loginClick}
-              variant="outline"
-              className="w-full justify-start gap-2"
-            >
-              <LogInIcon size={16} />
-              Fazer Login
-            </Button>
+            {status === "authenticated" && data?.user && (
+              <div className="my-2 flex flex-col">
+                <div className="flex items-center gap-2 pb-2 pt-4">
+                  <Avatar>
+                    <AvatarFallback>
+                      {data.user?.name?.[0].toUpperCase()}
+                    </AvatarFallback>
+
+                    {data.user.image && <AvatarImage src={data.user.image} />}
+                  </Avatar>
+
+                  <p className="text-sm font-medium">{data.user.name}</p>
+                </div>
+                <Separator />
+              </div>
+            )}
+
+            {status === "unauthenticated" && (
+              <Button
+                onClick={loginClick}
+                variant="outline"
+                className="w-full justify-start gap-2"
+              >
+                <LogInIcon size={16} />
+                Fazer Login
+              </Button>
+            )}
 
             <Button variant="outline" className="w-full justify-start gap-2">
               <HomeIcon size={16} />
@@ -61,12 +94,29 @@ const Header = () => {
               <Search size={16} />
               Search
             </Button>
+
+            {status === "authenticated" && (
+              <Button
+                onClick={logoutClick}
+                variant="outline"
+                className="w-full justify-start gap-2"
+              >
+                <LogOutIcon size={16} />
+                Sair
+              </Button>
+            )}
           </div>
         </SheetContent>
       </Sheet>
 
       <div>
-        <Image src={logoPet} alt={"pets-logo"} width={50} />
+        {theme && (
+          <Image
+            src={theme === "light" ? PetLogoLight : PetLogoDark}
+            alt={"pets-logo"}
+            width={50}
+          />
+        )}
       </div>
 
       <ModeToggle />
