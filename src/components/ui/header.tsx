@@ -19,11 +19,33 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Spinner from "../../../public/svg/spinner";
 
 const Header = () => {
   const { status, data } = useSession();
+  const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
+
+  useEffect(() => {
+    if (theme) {
+      setLoading(false);
+    }
+  }, [theme]);
+
+  const logoImg = useMemo(() => {
+    if (!loading) {
+      if (theme && theme === "light") {
+        return PetLogoLight;
+      }
+
+      if (theme && theme === "dark") {
+        return PetLogoDark;
+      }
+
+      return null;
+    }
+  }, [loading, theme]);
 
   const loginClick = async () => {
     await signIn();
@@ -37,11 +59,7 @@ const Header = () => {
     <Card className="flex justify-between rounded-[0px] px-7 py-4">
       <Sheet>
         <SheetTrigger asChild>
-          <Button
-            onClick={() => console.log(theme)}
-            size="icon"
-            variant="outline"
-          >
+          <Button size="icon" variant="outline">
             <MenuIcon />
           </Button>
         </SheetTrigger>
@@ -109,15 +127,11 @@ const Header = () => {
         </SheetContent>
       </Sheet>
 
-      <div>
-        {theme && (
-          <Image
-            src={theme === "light" ? PetLogoLight : PetLogoDark}
-            alt={"pets-logo"}
-            width={50}
-          />
-        )}
-      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Image alt={"pets-logo"} src={logoImg || ""} width={50} height={50} />
+      )}
 
       <ModeToggle />
     </Card>
