@@ -14,13 +14,19 @@ import { ModeToggle } from "./toggle-dark-mode";
 import { useTheme } from "next-themes";
 import PetLogoLight from "../../../public/pets-logo-light.png";
 import PetLogoDark from "../../../public/pets-logo-dark.png";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "./sheet";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
 import { useEffect, useMemo, useState } from "react";
-import Spinner from "../../../public/svg/spinner";
+import Link from "next/link";
 
 const Header = () => {
   const { status, data } = useSession();
@@ -98,15 +104,33 @@ const Header = () => {
               </Button>
             )}
 
-            <Button variant="outline" className="w-full justify-start gap-2">
-              <HomeIcon size={16} />
-              Início
-            </Button>
+            <SheetClose asChild>
+              <Link href="/">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <HomeIcon size={16} />
+                  Início
+                </Button>
+              </Link>
+            </SheetClose>
 
-            <Button variant="outline" className="w-full justify-start gap-2">
-              <PawPrint size={16} />
-              Profile
-            </Button>
+            {data && (
+              <SheetClose asChild>
+                <Link
+                  href={`/profile/${data?.user?.name?.replace(/\s+/g, "")}`}
+                >
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start gap-2"
+                  >
+                    <PawPrint size={16} />
+                    Profile
+                  </Button>
+                </Link>
+              </SheetClose>
+            )}
 
             <Button variant="outline" className="w-full justify-start gap-2">
               <Search size={16} />
@@ -128,9 +152,17 @@ const Header = () => {
       </Sheet>
 
       {loading ? (
-        <Spinner />
+        <div className="min-h-[50px] min-w-[50px]" />
       ) : (
-        <Image alt={"pets-logo"} src={logoImg || ""} width={50} height={50} />
+        <Link href="/">
+          <Image
+            alt={"pets-logo"}
+            src={logoImg || ""}
+            width={50}
+            height={50}
+            className="max-h-[50px] max-w-[50px]"
+          />
+        </Link>
       )}
 
       <ModeToggle />
