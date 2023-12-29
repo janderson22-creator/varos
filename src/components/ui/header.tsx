@@ -161,6 +161,7 @@ const Header = () => {
             width={50}
             height={50}
             className="max-h-[50px] max-w-[50px]"
+            priority
           />
         </Link>
       )}

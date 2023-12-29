@@ -9,7 +9,7 @@ import AppProvider from "@/context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pet Pals",
+  title: "Pet Pals - The social media for your pets",
   description: "The social media for your pets",
 };
 

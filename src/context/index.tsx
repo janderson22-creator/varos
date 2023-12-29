@@ -1,8 +1,13 @@
 import React from "react";
 import { UserProvider } from "./user";
+import { PetProvider } from "./pet";
 
 const AppProvider: React.FC<ChildrenProps> = ({ children }) => {
-  return <UserProvider>{children}</UserProvider>;
+  return (
+    <UserProvider>
+      <PetProvider>{children}</PetProvider>
+    </UserProvider>
+  );
 };
 
 export default AppProvider;
