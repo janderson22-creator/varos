@@ -17,6 +17,8 @@ model Pet {
   imageUrl String
   backgroundURL String
   description String
+  gender String
+  species String
   posts Post[]
 
 // reference to user
