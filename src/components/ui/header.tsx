@@ -119,7 +119,7 @@ const Header = () => {
             {data && (
               <SheetClose asChild>
                 <Link
-                  href={`/profile/${data?.user?.name?.replace(/\s+/g, "")}`}
+                  href={`/profile`}
                 >
                   <Button
                     variant="outline"

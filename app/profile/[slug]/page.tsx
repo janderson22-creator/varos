@@ -1,45 +1,25 @@
 "use client";
-import Spinner from "@/components/svg/spinner";
-import { Button } from "@/components/ui/button";
-import ChoosePet from "@/components/ui/choosePet";
-import CreatePet from "@/components/ui/createPet";
 import { usePet } from "@/context/pet";
-import { PlusCircle } from "lucide-react";
+import Image from "next/image";
 
-const Profile = () => {
-  const { loadingPets, pets } = usePet();
+const PetProfile = () => {
+  const { currentPet } = usePet();
 
   return (
-    <div className="h-[calc(100%-85px)]">
-      {loadingPets ? (
-        <div
-          className="m-auto flex h-full items-center justify-center"
-          role="status"
-        >
-          <Spinner />
-        </div>
-      ) : pets?.length ? (
-        <div className="flex h-full items-center justify-center">
+    <div>
+      <p>{currentPet?.name}</p>
 
-          <div className="flex">
-            {pets.map((pet, key) => (
-              <ChoosePet key={key} pet={pet} />
-            ))}
-
-            <Button className="ml-2 rounded-full" size="icon">
-              <PlusCircle />
-            </Button>
-          </div>
-
-        </div>
-      ) : (
-        <div className="flex h-full flex-col items-center justify-center border">
-          <p className="mb-2 text-lg font-medium">Adicionar Pet?</p>
-          <CreatePet />
-        </div>
+      {currentPet?.imageUrl && (
+        <Image
+          src={currentPet?.imageUrl}
+          alt={"pet-image"}
+          width={100}
+          height={100}
+        />
       )}
+      
     </div>
   );
 };
 
-export default Profile;
+export default PetProfile;

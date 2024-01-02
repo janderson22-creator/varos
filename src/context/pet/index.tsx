@@ -25,6 +25,35 @@ export type ContextValue = {
         userId: string;
       }[]
     | undefined;
+  setCurrentPet: React.Dispatch<
+    React.SetStateAction<
+      | {
+          id: string;
+          name: string;
+          slug: string;
+          imageUrl: string;
+          backgroundURL: string;
+          description: string;
+          gender: string;
+          species: string;
+          userId: string;
+        }
+      | undefined
+    >
+  >;
+  currentPet:
+    | {
+        id: string;
+        name: string;
+        slug: string;
+        imageUrl: string;
+        backgroundURL: string;
+        description: string;
+        gender: string;
+        species: string;
+        userId: string;
+      }
+    | undefined;
   loadingPets: boolean;
 };
 
@@ -35,6 +64,7 @@ export const PetContext = React.createContext<ContextValue | undefined>(
 export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
   const { user } = useUser();
   const [pets, setPets] = useState<Pet[]>();
+  const [currentPet, setCurrentPet] = useState<Pet>();
   const [loadingPets, setLoadingPets] = useState<boolean>(false);
 
   const fetchPets = useCallback(async () => {
@@ -42,7 +72,6 @@ export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
     try {
       const response = await axios.get(`/api/pet/get?userId=${user?.id}`);
       setPets(response.data.pets);
-      console.log(response.data.pets)
     } catch (error) {
       console.error("Error to get pets:", error);
     } finally {
@@ -67,8 +96,8 @@ export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
   }, [fetchPets, user?.id]);
 
   const value = useMemo(
-    () => ({ pets, loadingPets, postPet }),
-    [pets, loadingPets, postPet],
+    () => ({ setCurrentPet, currentPet, pets, loadingPets, postPet }),
+    [setCurrentPet, currentPet, pets, loadingPets, postPet],
   );
 
   return (
