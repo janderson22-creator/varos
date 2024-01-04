@@ -18,8 +18,8 @@ const ChoosePet: React.FC<Props> = ({ pet, setPet }) => {
   return (
     <Link
       onClick={() => setPet(pet as Pet)}
-      href={`/profile/${pet.slug}`}
-      className="flex flex-col items-center gap-1"
+      href={`/profile/${pet.slug.toLocaleLowerCase()}`}
+      className="w-full flex items-center gap-2 border-b py-2"
     >
       <Avatar>
         <AvatarFallback>{pet.name?.[0].toUpperCase()}</AvatarFallback>

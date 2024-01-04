@@ -32,14 +32,14 @@ const Profile = () => {
         <div className="mt-[60%] flex h-full flex-col items-center gap-2">
           <p className="font-semibold">Selecione seu pet</p>
 
-          <div className="mt-4 flex">
+          <div className="flex flex-col items-start justify-start w-full px-10">
             {pets.map((pet, key) => (
               <ChoosePet key={key} pet={pet} setPet={selectedPet} />
             ))}
 
             <Sheet>
-              <SheetTrigger asChild>
-                <Button className="ml-2 rounded-full" size="icon">
+              <SheetTrigger className="mt-10 mx-auto" asChild>
+                <Button className="rounded-full" size="icon">
                   <PlusCircle />
                 </Button>
               </SheetTrigger>

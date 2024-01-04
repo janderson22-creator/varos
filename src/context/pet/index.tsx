@@ -14,6 +14,7 @@ import { useUser } from "../user";
 
 export type ContextValue = {
   postPet: (petData: Pet) => Promise<void>;
+  deletePet: () => Promise<void>;
   pets:
     | {
         id: string;
@@ -69,6 +70,7 @@ export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
 
   const fetchPets = useCallback(async () => {
     setLoadingPets(true);
+
     try {
       const response = await axios.get(`/api/pet/get?userId=${user?.id}`);
       setPets(response.data.pets);
@@ -79,15 +81,30 @@ export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
     }
   }, [user?.id]);
 
-  const postPet = useCallback(async (petData: Pet) => {
-    try {
-      const response = await axios.post(`/api/pet/post`, petData);
+  const postPet = useCallback(
+    async (petData: Pet) => {
+      try {
+        const response = await axios.post(`/api/pet/post`, petData);
+        fetchPets();
+        console.log(response);
+      } catch (error) {
+        console.error("Erro ao criar pet:", error);
+      }
+    },
+    [fetchPets],
+  );
 
+  const deletePet = useCallback(async () => {
+    try {
+      const response = await axios.delete(
+        `/api/pet/delete?petId=${currentPet?.id}`,
+      );
       console.log(response);
+      fetchPets();
     } catch (error) {
-      console.error("Erro ao criar pet:", error);
+      console.error("Error to delete pets:", error);
     }
-  }, []);
+  }, [currentPet?.id, fetchPets]);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -96,8 +113,15 @@ export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
   }, [fetchPets, user?.id]);
 
   const value = useMemo(
-    () => ({ setCurrentPet, currentPet, pets, loadingPets, postPet }),
-    [setCurrentPet, currentPet, pets, loadingPets, postPet],
+    () => ({
+      setCurrentPet,
+      currentPet,
+      pets,
+      loadingPets,
+      postPet,
+      deletePet,
+    }),
+    [setCurrentPet, currentPet, pets, loadingPets, postPet, deletePet],
   );
 
   return (
