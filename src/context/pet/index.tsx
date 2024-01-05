@@ -55,6 +55,35 @@ export type ContextValue = {
         userId: string;
       }
     | undefined;
+  setCurrentPetPost: React.Dispatch<
+    React.SetStateAction<
+      | {
+          id: string;
+          name: string;
+          slug: string;
+          imageUrl: string;
+          backgroundURL: string;
+          description: string;
+          gender: string;
+          species: string;
+          userId: string;
+        }
+      | undefined
+    >
+  >;
+  currentPetPost:
+    | {
+        id: string;
+        name: string;
+        slug: string;
+        imageUrl: string;
+        backgroundURL: string;
+        description: string;
+        gender: string;
+        species: string;
+        userId: string;
+      }
+    | undefined;
   loadingPets: boolean;
 };
 
@@ -66,6 +95,7 @@ export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
   const { user } = useUser();
   const [pets, setPets] = useState<Pet[]>();
   const [currentPet, setCurrentPet] = useState<Pet>();
+  const [currentPetPost, setCurrentPetPost] = useState<Pet>();
   const [loadingPets, setLoadingPets] = useState<boolean>(false);
 
   const fetchPets = useCallback(async () => {
@@ -120,8 +150,19 @@ export const PetProvider: React.FC<ChildrenProps> = ({ children, ...rest }) => {
       loadingPets,
       postPet,
       deletePet,
+      currentPetPost,
+      setCurrentPetPost,
     }),
-    [setCurrentPet, currentPet, pets, loadingPets, postPet, deletePet],
+    [
+      setCurrentPet,
+      currentPet,
+      pets,
+      loadingPets,
+      postPet,
+      deletePet,
+      currentPetPost,
+      setCurrentPetPost,
+    ],
   );
 
   return (

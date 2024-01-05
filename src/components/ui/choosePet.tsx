@@ -13,20 +13,35 @@ interface Props {
     userId: string;
   };
   setPet: (pet: Pet) => void;
+  post?: boolean;
 }
-const ChoosePet: React.FC<Props> = ({ pet, setPet }) => {
+
+const ChoosePet: React.FC<Props> = ({ pet, setPet, post }) => {
+  if (post) {
+    return (
+      <div
+        onClick={() => setPet(pet as Pet)}
+        className="flex w-full items-center gap-2 border-b py-2"
+      >
+        <Avatar>
+          <AvatarFallback>{pet.name?.[0].toUpperCase()}</AvatarFallback>
+          {pet.imageUrl && <AvatarImage src={pet.imageUrl} />}
+        </Avatar>
+        <p className="font-medium opacity-90">{pet.name}</p>
+      </div>
+    );
+  }
+
   return (
     <Link
       onClick={() => setPet(pet as Pet)}
       href={`/profile/${pet.slug.toLocaleLowerCase()}`}
-      className="w-full flex items-center gap-2 border-b py-2"
+      className="flex w-full items-center gap-2 border-b py-2"
     >
       <Avatar>
         <AvatarFallback>{pet.name?.[0].toUpperCase()}</AvatarFallback>
-
         {pet.imageUrl && <AvatarImage src={pet.imageUrl} />}
       </Avatar>
-
       <p className="font-medium opacity-90">{pet.name}</p>
     </Link>
   );
