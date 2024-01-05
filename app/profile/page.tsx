@@ -29,7 +29,7 @@ const Profile = () => {
           <Spinner />
         </div>
       ) : pets?.length ? (
-        <div className="mt-[60%] flex h-full flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center justify-center gap-2">
           <p className="font-semibold">Selecione seu pet</p>
 
           <div className="flex flex-col items-start justify-start w-full px-10">
