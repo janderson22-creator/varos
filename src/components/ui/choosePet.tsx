@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Pet } from "@prisma/client";
+import { SheetTrigger } from "./sheet";
 
 interface Props {
   pet: {
@@ -19,7 +20,7 @@ interface Props {
 const ChoosePet: React.FC<Props> = ({ pet, setPet, post }) => {
   if (post) {
     return (
-      <div
+      <SheetTrigger
         onClick={() => setPet(pet as Pet)}
         className="flex w-full items-center gap-2 border-b py-2"
       >
@@ -28,7 +29,7 @@ const ChoosePet: React.FC<Props> = ({ pet, setPet, post }) => {
           {pet.imageUrl && <AvatarImage src={pet.imageUrl} />}
         </Avatar>
         <p className="font-medium opacity-90">{pet.name}</p>
-      </div>
+      </SheetTrigger>
     );
   }
 

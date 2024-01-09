@@ -1,6 +1,6 @@
 "use client";
 
-import { Pet, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, {
@@ -33,7 +33,6 @@ export const UserProvider: React.FC<ChildrenProps> = ({
 }) => {
   const { data } = useSession();
   const [user, setUser] = useState<User>();
-  const [pets, setPets] = useState<Pet>();
 
   const fetchUser = useCallback(async () => {
     try {
@@ -49,21 +48,6 @@ export const UserProvider: React.FC<ChildrenProps> = ({
 
     fetchUser();
   }, [data, fetchUser]);
-
-  // const fetchPets = useCallback(async () => {
-  //   try {
-  //     const response = await axios.get(`/api/pet?userId=${user?.id}`);
-  //     setPets(response.data);
-  //   } catch (error) {
-  //     console.error("Error to get pets:", error);
-  //   }
-  // }, [user?.id]);
-
-  // useEffect(() => {
-  //   if (!user?.id) return;
-
-  //   fetchPets();
-  // }, [data, fetchPets, fetchUser, user?.id]);
 
   const value = useMemo(() => ({ user }), [user]);
 
