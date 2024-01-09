@@ -47,7 +47,6 @@ const CreatePet: React.FC = () => {
     if (file) {
       const imageUrl = await convertBlobToUrl(file);
   
-      // Verifique se imageUrl não é null antes de atualizar o estado
       if (typeof imageUrl === 'string') {
         onChange(field, imageUrl);
       } else {
