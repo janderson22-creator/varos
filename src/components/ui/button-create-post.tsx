@@ -28,6 +28,7 @@ const ButtonCreatePost = () => {
     namePet: "",
     slug: "",
     petId: "",
+    imageUrl: "",
   });
 
   const selectedPet = useCallback(
@@ -41,10 +42,16 @@ const ButtonCreatePost = () => {
     setPetData((prevState) => ({
       ...prevState,
       namePet: currentPetPost?.name || "",
+      imageUrl: currentPetPost?.imageUrl || "",
       slug: currentPetPost?.slug || "",
       petId: currentPetPost?.id || "",
     }));
-  }, [currentPetPost?.id, currentPetPost?.name, currentPetPost?.slug]);
+  }, [
+    currentPetPost?.id,
+    currentPetPost?.imageUrl,
+    currentPetPost?.name,
+    currentPetPost?.slug,
+  ]);
 
   const publishPublication = useCallback(() => {
     if (!petData.text.length) {
