@@ -30,6 +30,7 @@ model Post {
   id String @id @default(uuid())
   text String
   namePet String
+  imageUrl String
   slug String
   likes Int @default(0)
   comments Comment[]

@@ -4,12 +4,7 @@ export async function POST(request: Request) {
   const prisma = new PrismaClient();
   const data = await request.json();
 
-  const requiredFields = [
-    "text",
-    "namePet",
-    "slug",
-    "petId",
-  ];
+  const requiredFields = ["text", "namePet", "slug", "imageUrl", "petId"];
 
   for (const field of requiredFields) {
     if (!data[field]) {
@@ -23,6 +18,7 @@ export async function POST(request: Request) {
     data: {
       text: data.text,
       namePet: data.namePet,
+      imageUrl: data.imageUrl,
       slug: data.slug,
       likes: data.likes,
       petId: data.petId,
