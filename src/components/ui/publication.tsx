@@ -7,7 +7,7 @@ const Publication = () => {
   const { posts } = UsePost();
 
   return (
-    <div>
+    <div className="max-h-[calc(100vh-156px)] overflow-y-scroll">
       {!posts?.length ? (
         <div className="flex items-center justify-center mt-10">Não contém posts ainda!</div>
       ) : (

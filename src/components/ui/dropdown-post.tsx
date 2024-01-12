@@ -6,8 +6,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
+import { UsePost } from "@/context/publication";
+import { usePet } from "@/context/pet";
+import { useEffect, useMemo } from "react";
 
-const DropdownPost = () => {
+interface Props {
+  idPost: string;
+  idPet: string;
+}
+
+const DropdownPost: React.FC<Props> = ({ idPost, idPet }) => {
+  const { deletePublication } = UsePost();
+  const { pets } = usePet();
+
+  const isMyPost = useMemo(() => {
+    const petIds = pets?.map((pet) => pet.id);
+
+    return petIds?.some((pet) => pet === idPet);
+  }, [pets, idPet]);
+
   return (
     <DropdownMenu>
       <div className="ml-auto">
@@ -17,11 +34,13 @@ const DropdownPost = () => {
 
         <DropdownMenuContent className="mr-5">
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => deletePublication(idPost, isMyPost)}
+            >
               <Trash className="mr-2 h-4 w-4" />
               <span>Excluir</span>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => console.log(pets)}>
               <Pencil className="mr-2 h-4 w-4" />
               <span>Editar</span>
             </DropdownMenuItem>

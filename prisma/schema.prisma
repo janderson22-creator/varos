@@ -10,6 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// model Pet {
+//   id String @id @default(uuid())
+//   name String
+//   slug String
+//   imageUrl String
+//   backgroundURL String
+//   description String
+//   gender String
+//   species String
+//   posts Post[]
+
+// // reference to user
+//   userId   String
+//   user     User   @relation(fields: [userId], references: [id])
+// }
+
 model Pet {
   id String @id @default(uuid())
   name String
@@ -20,10 +36,16 @@ model Pet {
   gender String
   species String
   posts Post[]
+  followers Pet[] @relation("PetFollowers", map: "followers")
+  following Pet[] @relation("PetFollowing", map: "following")
 
-// reference to user
+  // reference to user
   userId   String
   user     User   @relation(fields: [userId], references: [id])
+
+  // Add this field for the opposite relation
+  followersOf Pet[] @relation("PetFollowers", map: "followersOf")
+  followingOf Pet[] @relation("PetFollowing", map: "followingOf")
 }
 
 model Post {

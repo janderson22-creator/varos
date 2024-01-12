@@ -5,7 +5,7 @@ import DropdownPost from "./dropdown-post";
 import Like from "../svg/like";
 import Comment from "../svg/comment";
 import { formatCreatedAt } from "@/utils/format-date";
-
+  
 interface Props {
   post: PostType;
 }
@@ -14,9 +14,7 @@ const Post: React.FC<Props> = ({ post }) => {
   const formattedDate = formatCreatedAt(post.createdAt);
 
   return (
-    <div
-      className="px-3 py-4"
-    >
+    <div className="px-3 py-4">
       <div className="flex gap-3">
         <Avatar>
           <AvatarFallback>{post.namePet.toUpperCase()}</AvatarFallback>
@@ -28,11 +26,13 @@ const Post: React.FC<Props> = ({ post }) => {
           <p className="text-xs opacity-60">@{post.slug}</p>
         </div>
 
-        <DropdownPost />
+        <DropdownPost idPost={post.id} idPet={post.petId} />
       </div>
 
       <div className="mt-3">
-        <p className="text-sm">{post.text}</p>
+        <p className="flex-wrap overflow-hidden break-words text-sm">
+          {post.text}
+        </p>
       </div>
 
       <div className="mt-3 flex items-center gap-2">
@@ -48,7 +48,7 @@ const Post: React.FC<Props> = ({ post }) => {
       </div>
 
       <div className="mt-2">
-        <p className="text-[#A09BA3] font-sm">{formattedDate}</p>
+        <p className="font-sm text-[#A09BA3]">{formattedDate}</p>
       </div>
     </div>
   );
