@@ -11,6 +11,10 @@ import React, {
 } from "react";
 
 export type ContextValue = {
+  deletePublication: (
+    id: string,
+    isMyPost: boolean | undefined,
+  ) => Promise<void>;
   postPublication: (data: Post) => Promise<void>;
   fetchPublications: () => Promise<void>;
   posts:
@@ -52,6 +56,25 @@ export const PostProvider: React.FC<ChildrenProps> = ({
     }
   }, []);
 
+  const deletePublication = useCallback(
+    async (id: string, isMyPost: boolean | undefined) => {
+      if (!isMyPost) return;
+
+      try {
+        const response = await axios.delete(
+          `/api/publication/delete?postId=${id}`,
+        );
+
+        console.log(response);
+        const newPosts = posts?.filter((post) => post.id !== id);
+        setPosts(newPosts);
+      } catch (error) {
+        console.error("Error to delete post:", error);
+      }
+    },
+    [posts],
+  );
+
   const fetchPublications = useCallback(async () => {
     try {
       const response = await axios.get(`/api/publication/get`);
@@ -69,8 +92,8 @@ export const PostProvider: React.FC<ChildrenProps> = ({
   }, []);
 
   const value = useMemo(
-    () => ({ postPublication, fetchPublications, posts }),
-    [postPublication, fetchPublications, posts],
+    () => ({ postPublication, fetchPublications, posts, deletePublication }),
+    [postPublication, fetchPublications, posts, deletePublication],
   );
 
   return (
