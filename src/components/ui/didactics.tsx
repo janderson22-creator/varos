@@ -13,8 +13,12 @@ const Didactics = () => {
   return (
     <div>
       <div className="flex flex-col items-center">
-        <h2 className="text-[30px] font-semibold">Didática de verdade</h2>
-        <p className="text-xl font-semibold">Garantindo seu aprendizado</p>
+        <h2 className="text-center text-[24px] font-semibold">
+          Didática de verdade
+        </h2>
+        <p className="mt-2 text-center text-sm font-semibold opacity-70">
+          Garantindo seu aprendizado
+        </p>
       </div>
 
       <Carousel
@@ -26,12 +30,12 @@ const Didactics = () => {
         <CarouselContent className="mx-4">
           {comments.map((comment, index) => (
             <CarouselItem
-              className="flex h-[360px] max-h-[360px] min-h-[360px] flex-col items-left justify-center rounded-[24px] bg-[#131516] p-6 mr-2"
+              className="items-left mr-2 flex h-[360px] max-h-[360px] min-h-[360px] flex-col justify-center rounded-[24px] bg-[#131516] p-6"
               key={index}
             >
               <Image src={Aspas} alt={""} />
               <p className="mt-4 text-left text-lg text-[#B0B7BE]">{comment}</p>
-              <p className="text-lg font-medium mt-4">Assinante VAROS</p>
+              <p className="mt-4 text-lg font-medium">Assinante VAROS</p>
             </CarouselItem>
           ))}
         </CarouselContent>
