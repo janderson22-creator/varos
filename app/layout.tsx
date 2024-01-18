@@ -10,8 +10,8 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pet Pals - The social media for your pets",
-  description: "The social media for your pets",
+  title: "Varos | Investir de forma mais inteligente.",
+  description: "Investir de forma mais inteligente.",
 };
 
 export default function RootLayout({
