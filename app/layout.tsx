@@ -3,7 +3,6 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/header";
-import { AuthProvider } from "@/providers/auth";
 import AppProvider from "@/context";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -22,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <AuthProvider>
           <AppProvider>
             <ThemeProvider
               attribute="class"
@@ -35,7 +33,6 @@ export default function RootLayout({
               <Toaster />
             </ThemeProvider>
           </AppProvider>
-        </AuthProvider>
       </body>
     </html>
   );
