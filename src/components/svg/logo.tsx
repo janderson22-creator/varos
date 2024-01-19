@@ -1,11 +1,15 @@
 import { useTheme } from "next-themes";
 
-const Logo = () => {
+interface Props {
+  width?: string;
+}
+
+const Logo: React.FC<Props> = ({ width }) => {
   const { theme } = useTheme();
 
   return (
     <svg
-      width="101"
+      width={width || "101"}
       height="18"
       viewBox="0 0 101 18"
       fill="none"
