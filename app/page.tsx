@@ -1,6 +1,7 @@
 "use client"
 import BuyNow from "@/components/ui/buy-season";
 import Didactics from "@/components/ui/didactics";
+import Footer from "@/components/ui/footer";
 import Form from "@/components/ui/form";
 import Men from "@/components/ui/men";
 import SimpleInvest from "@/components/ui/simple-invest-season";
@@ -31,6 +32,10 @@ export default function Home() {
 
       <div className="mt-[128px] px-4">
         <Form />
+      </div>
+
+      <div className="px-4 mt-[184px] pb-[48px]">
+        <Footer />
       </div>
     </div>
   );
