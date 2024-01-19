@@ -4,8 +4,11 @@ import Aspas from "../../../public/svg/aspas.svg";
 import { Carousel, CarouselContent, CarouselItem } from "./carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 const Didactics = () => {
+  const { theme } = useTheme();
   const plugin = React.useRef(
     Autoplay({ delay: 4000, stopOnInteraction: true }),
   );
@@ -30,7 +33,10 @@ const Didactics = () => {
         <CarouselContent className="mx-4">
           {comments.map((comment, index) => (
             <CarouselItem
-              className="items-left mr-2 flex h-[360px] max-h-[360px] min-h-[360px] flex-col justify-center rounded-[24px] bg-[#131516] p-6"
+              className={cn(
+                "items-left mr-2 flex h-[360px] max-h-[360px] min-h-[360px] flex-col justify-center rounded-[24px] p-6",
+                theme === "light" ? "bg-[#cfd4d758]" : "bg-[#131516]",
+              )}
               key={index}
             >
               <Image src={Aspas} alt={""} />

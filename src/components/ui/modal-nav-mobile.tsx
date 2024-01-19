@@ -8,8 +8,10 @@ import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 const NavBar = () => {
+  const { theme } = useTheme();
   const [optionSelected, setOptionSelected] = useState<TypeOptions>();
 
   const openOption = useCallback(
@@ -24,7 +26,7 @@ const NavBar = () => {
   );
 
   return (
-    <SheetContent className="px-0" side="right">
+    <SheetContent className="px-0 overflow-auto" side="right">
       <SheetHeader className="px-4">
         <Logo width={"70"} />
       </SheetHeader>
@@ -50,16 +52,22 @@ const NavBar = () => {
                 "rounded-[8px]",
                 optionSelected === "Produtos" &&
                   option === "Produtos" &&
+                  theme === "dark" &&
                   "border-[#B0B7BE] bg-[#222729]",
+                optionSelected === "Produtos" &&
+                  option === "Produtos" &&
+                  theme === "light" &&
+                  "border-[#B0B7BE] bg-[#cfd4d758]",
               )}
               key={key}
             >
               <div
                 onClick={() => openOption(option)}
                 className={cn(
-                  "px-4 w-full border-b-[2px] border-[#222729] py-6 font-bold opacity-90",optionSelected === "Produtos" &&
-                  option === "Produtos" &&
-                  "border-[#B0B7BE]",
+                  "w-full border-b-[2px] border-[#222729] px-4 py-6 font-bold opacity-90",
+                  optionSelected === "Produtos" &&
+                    option === "Produtos" &&
+                    "border-[#B0B7BE]",
                 )}
               >
                 {option}
@@ -81,7 +89,7 @@ const NavBar = () => {
                       key={index}
                     >
                       <div>
-                        <p className="font-semibold text-[#FFF]">
+                        <p className="font-semibold">
                           {product.title}
                         </p>
                         <p className="mt-2 text-xs font-normal opacity-80">
