@@ -1,8 +1,11 @@
 "use client";
 import { useUser } from "@/context/user";
+import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
 const Form = () => {
+  const { theme } = useTheme();
   const { postUser } = useUser();
   const [data, setData] = useState({
     name: "",
@@ -35,7 +38,10 @@ const Form = () => {
 
         <form
           onSubmit={submit}
-          className="mt-[40px] w-full rounded-[32px] border border-[#4D5358] bg-[#131516] px-[53px] py-[60px]"
+          className={cn(
+            "mt-[40px] w-full rounded-[32px] border border-[#4D5358] bg-[#131516] px-[53px] py-[60px]",
+            theme === "light" ? "bg-[#cfd4d758]" : "bg-[#131516]",
+          )}
         >
           <div className="mb-4">
             <input
