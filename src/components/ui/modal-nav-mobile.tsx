@@ -47,7 +47,7 @@ const NavBar = () => {
           {options.map((option, key) => (
             <div
               className={cn(
-                "rounded-[8px] px-4",
+                "rounded-[8px]",
                 optionSelected === "Produtos" &&
                   option === "Produtos" &&
                   "border-[#B0B7BE] bg-[#222729]",
@@ -57,7 +57,9 @@ const NavBar = () => {
               <div
                 onClick={() => openOption(option)}
                 className={cn(
-                  "w-full border-b border-[#222729] py-6 font-bold opacity-90",
+                  "px-4 w-full border-b-[2px] border-[#222729] py-6 font-bold opacity-90",optionSelected === "Produtos" &&
+                  option === "Produtos" &&
+                  "border-[#B0B7BE]",
                 )}
               >
                 {option}
@@ -66,7 +68,7 @@ const NavBar = () => {
               <div
                 className={cn(
                   optionSelected === "Produtos" && option === "Produtos"
-                    ? "appear"
+                    ? "appear mt-8 px-4"
                     : "disabled",
                 )}
               >
