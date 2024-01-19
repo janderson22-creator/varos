@@ -18,10 +18,6 @@ export default function Home() {
         <SimpleInvest />
       </div>
 
-      <div className="mt-10 px-4">
-        <WalletSelect />
-      </div>
-
       <div className="mt-[122px]">
         <Didactics />
       </div>

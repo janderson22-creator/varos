@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import ArrowRight from "../svg/arrow-right";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
@@ -10,10 +10,14 @@ import EssencialIcon from "../../../public/svg/wallets/essencial.svg";
 import FllsIcon from "../../../public/svg/wallets/flls.svg";
 import SmallIcon from "../../../public/svg/wallets/small-caps.svg";
 import OptionSelected from "./option-selected";
+import WalletSelect from "./wallet-selection";
 
 const SimpleInvest = () => {
+  const walletSelectRef = useRef<HTMLDivElement>(null);
   const [optionSelected, setOptionSelected] = useState<OptionsType>();
-  const [subOptionSelected, setSubOptionSelected] = useState("");
+  const [subOptionSelected, setSubOptionSelected] = useState<SubOptionsType>(
+    wallets[0] as SubOptionsType,
+  );
   const shouldAppear = optionSelected ? "appear" : "disabled";
   const { theme } = useTheme();
 
@@ -41,6 +45,17 @@ const SimpleInvest = () => {
     }
   }, [optionSelected]);
 
+  const handleSubOptionSelect = (subOption: SubOptionsType) => {
+    setSubOptionSelected(subOption);
+
+    if (walletSelectRef.current) {
+      window.scrollTo({
+        top: walletSelectRef.current.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div className="mx-4">
       <h2 className="text-center text-[24px] font-semibold">
@@ -60,7 +75,6 @@ const SimpleInvest = () => {
             <div
               onClick={() => {
                 openOption(option);
-                setSubOptionSelected("");
               }}
               className={cn(
                 "flex items-center justify-center gap-2 rounded-[40px] border py-4 text-lg ",
@@ -89,11 +103,16 @@ const SimpleInvest = () => {
                   option={details}
                   optionSelected={subOptionSelected}
                   setOption={setSubOptionSelected}
+                  click={handleSubOptionSelect}
                 />
               )}
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-10" ref={walletSelectRef}>
+        <WalletSelect option={subOptionSelected} />
       </div>
     </div>
   );
@@ -104,6 +123,7 @@ export default SimpleInvest;
 // utils
 
 type OptionsType = "Carteiras" | "Cursos" | "Consultoria";
+export type SubOptionsType = { icon: any; name: string };
 const options = ["Carteiras", "Cursos", "Consultoria"];
 const wallets = [
   {
