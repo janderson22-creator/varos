@@ -25,7 +25,7 @@ const Didactics = () => {
         </p>
       </div>
 
-      <div className="w-full flex flex-col md:flex-row">
+      <div className="w-full flex flex-col md:flex-row lg:items-center">
         <Carousel
           plugins={[plugin.current]}
           className="mt-[54px] w-full md:w-6/12"

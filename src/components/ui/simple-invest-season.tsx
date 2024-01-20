@@ -65,8 +65,8 @@ const SimpleInvest = () => {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row md:gap-7">
-        <div className="md:w-5/12">
+      <div className="flex flex-col md:flex-row md:gap-7 lg:gap-60">
+        <div className="md:w-5/12 lg:w-4/12">
           {options.map((option, key) => (
             <div
               className="mb-4 first-of-type:mt-[48px] last-of-type:mb-0"
@@ -77,7 +77,7 @@ const SimpleInvest = () => {
                   openOption(option);
                 }}
                 className={cn(
-                  "flex items-center justify-center gap-2 rounded-[40px] border py-4 text-lg ",
+                  "cursor-pointer flex items-center justify-center gap-2 rounded-[40px] border py-4 text-lg ",
                   option === optionSelected &&
                     theme === "light" &&
                     "bg-[#222729] font-bold text-white",
@@ -111,7 +111,7 @@ const SimpleInvest = () => {
           ))}
         </div>
 
-        <div className="md:w-7/12 mt-10" ref={walletSelectRef}>
+        <div className="md:w-7/12 lg:w-8/12 mt-10" ref={walletSelectRef}>
           <WalletSelect option={subOptionSelected} />
         </div>
       </div>

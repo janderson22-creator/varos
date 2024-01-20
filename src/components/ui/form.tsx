@@ -28,8 +28,8 @@ const Form = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center md:flex-row md:items-start">
-        <div className="flex flex-col md:w-6/12 md:mr-10">
+      <div className="flex flex-col items-center justify-center md:flex-row md:items-start lg:justify-between">
+        <div className="flex flex-col md:w-6/12 lg:w-4/12 md:mr-10">
           <h2 className="text-center text-[24px] font-semibold md:text-left">
             Cadastre-se para receber mais informações.
           </h2>
@@ -41,7 +41,7 @@ const Form = () => {
         <form
           onSubmit={submit}
           className={cn(
-            "mt-[40px] md:mt-0 w-full md:w-6/12 rounded-[32px] border border-[#4D5358] bg-[#131516] px-[53px] py-[60px]",
+            "mt-[40px] md:mt-0 w-full md:w-6/12 lg:w-6/12 rounded-[32px] border border-[#4D5358] bg-[#131516] px-[53px] py-[60px]",
             theme === "light" ? "bg-[#cfd4d758]" : "bg-[#131516]",
           )}
         >

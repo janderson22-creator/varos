@@ -13,8 +13,8 @@ export default function Home() {
       <div className="mt-[72px] px-4 md:flex">
         <BuyNow />
 
-        <div className="hidden md:block">
-          <Image src={Cards} alt={"Cards-Hero"} width={550} />
+        <div className="hidden md:block lg:pr-40">
+          <Image src={Cards} alt={"Cards-Hero"} className="w-[550px] lg:w-[300px]" />
         </div>
       </div>
 
