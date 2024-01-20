@@ -2,7 +2,6 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import SelecaoIcon from "../../../public/svg/wallets/selecao.svg";
 import WalletSelectImg from "../../../public/wallet-select.png";
 import { SubOptionsType } from "./simple-invest-season";
 

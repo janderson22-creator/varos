@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const Men = () => {
   const { theme } = useTheme()
   return (
-    <div>
+    <div className="md:w-full">
       <Image src={MenImage} alt={"Men"} />
 
       <div className={cn("mt-[48px] flex items-center justify-around rounded-[32px] border p-4", theme === 'light' ? "text-[#000] opacity-90" : "text-[#FAFAFA]")}>

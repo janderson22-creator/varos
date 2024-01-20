@@ -14,7 +14,8 @@ import WalletSelect from "./wallet-selection";
 
 const SimpleInvest = () => {
   const walletSelectRef = useRef<HTMLDivElement>(null);
-  const [optionSelected, setOptionSelected] = useState<OptionsType>();
+  const [optionSelected, setOptionSelected] =
+    useState<OptionsType>("Carteiras");
   const [subOptionSelected, setSubOptionSelected] = useState<SubOptionsType>(
     wallets[0] as SubOptionsType,
   );
@@ -23,13 +24,9 @@ const SimpleInvest = () => {
 
   const openOption = useCallback(
     (option: string) => {
-      if (option === optionSelected) {
-        return setOptionSelected(undefined);
-      }
-
       setOptionSelected(option as OptionsType);
     },
-    [optionSelected],
+    [],
   );
 
   const details = useMemo(() => {
@@ -58,61 +55,65 @@ const SimpleInvest = () => {
 
   return (
     <div className="mx-4">
-      <h2 className="text-center text-[24px] font-semibold">
-        Simplifique seus investimentos e alcance seus objetivos
-      </h2>
-      <p className="mt-2 text-center text-sm font-semibold opacity-70">
-        Conteúdos preparados para trazer mais segurança, independente do seu
-        nível.
-      </p>
-
-      <div>
-        {options.map((option, key) => (
-          <div
-            className="mb-4 first-of-type:mt-[48px] last-of-type:mb-0"
-            key={key}
-          >
-            <div
-              onClick={() => {
-                openOption(option);
-              }}
-              className={cn(
-                "flex items-center justify-center gap-2 rounded-[40px] border py-4 text-lg ",
-                option === optionSelected &&
-                  theme === "light" &&
-                  "bg-[#222729] font-bold text-white",
-                option === optionSelected &&
-                  theme === "dark" &&
-                  "bg-[#222729] font-bold",
-              )}
-            >
-              {option}
-              <div
-                className={cn(
-                  "transition duration-200 ease-in-out",
-                  option === optionSelected && "rotate-90",
-                )}
-              >
-                <ArrowRight />
-              </div>
-            </div>
-
-            <div className={`${shouldAppear}`}>
-              {option === optionSelected && (
-                <OptionSelected
-                  option={details}
-                  optionSelected={subOptionSelected}
-                  setOption={setSubOptionSelected}
-                  click={handleSubOptionSelect}
-                />
-              )}
-            </div>
-          </div>
-        ))}
+      <div className="md:w-6/12">
+        <h2 className="text-center text-[24px] font-semibold md:text-left">
+          Simplifique seus investimentos e alcance seus objetivos
+        </h2>
+        <p className="mt-2 text-center text-sm font-semibold opacity-70 md:text-left">
+          Conteúdos preparados para trazer mais segurança, independente do seu
+          nível.
+        </p>
       </div>
 
-      <div className="mt-10" ref={walletSelectRef}>
-        <WalletSelect option={subOptionSelected} />
+      <div className="flex flex-col md:flex-row md:gap-7">
+        <div className="md:w-5/12">
+          {options.map((option, key) => (
+            <div
+              className="mb-4 first-of-type:mt-[48px] last-of-type:mb-0"
+              key={key}
+            >
+              <div
+                onClick={() => {
+                  openOption(option);
+                }}
+                className={cn(
+                  "flex items-center justify-center gap-2 rounded-[40px] border py-4 text-lg ",
+                  option === optionSelected &&
+                    theme === "light" &&
+                    "bg-[#222729] font-bold text-white",
+                  option === optionSelected &&
+                    theme === "dark" &&
+                    "bg-[#222729] font-bold",
+                )}
+              >
+                {option}
+                <div
+                  className={cn(
+                    "transition duration-200 ease-in-out",
+                    option === optionSelected && "rotate-90",
+                  )}
+                >
+                  <ArrowRight />
+                </div>
+              </div>
+
+              <div className={`${shouldAppear}`}>
+                {option === optionSelected && (
+                  <OptionSelected
+                    option={details}
+                    optionSelected={subOptionSelected}
+                    setOption={setSubOptionSelected}
+                    click={handleSubOptionSelect}
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="md:w-7/12 mt-10" ref={walletSelectRef}>
+          <WalletSelect option={subOptionSelected} />
+        </div>
       </div>
     </div>
   );

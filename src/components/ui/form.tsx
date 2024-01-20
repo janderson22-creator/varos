@@ -28,18 +28,20 @@ const Form = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center">
-        <h2 className="text-center text-[24px] font-semibold">
-          Cadastre-se para receber mais informações.
-        </h2>
-        <p className="mt-2 text-center text-sm font-semibold opacity-70">
-          Fique ligado no que tem de melhor no Mercado Financeiro.
-        </p>
+      <div className="flex flex-col items-center justify-center md:flex-row md:items-start">
+        <div className="flex flex-col md:w-6/12 md:mr-10">
+          <h2 className="text-center text-[24px] font-semibold md:text-left">
+            Cadastre-se para receber mais informações.
+          </h2>
+          <p className="mt-2 text-center text-sm font-semibold opacity-70 md:text-left">
+            Fique ligado no que tem de melhor no Mercado Financeiro.
+          </p>
+        </div>
 
         <form
           onSubmit={submit}
           className={cn(
-            "mt-[40px] w-full rounded-[32px] border border-[#4D5358] bg-[#131516] px-[53px] py-[60px]",
+            "mt-[40px] md:mt-0 w-full md:w-6/12 rounded-[32px] border border-[#4D5358] bg-[#131516] px-[53px] py-[60px]",
             theme === "light" ? "bg-[#cfd4d758]" : "bg-[#131516]",
           )}
         >

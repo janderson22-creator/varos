@@ -23,14 +23,16 @@ const BuyNow = () => {
   const images = [Brad, Ficon, Valor, Tc, Bm, Neofeed];
 
   return (
-    <div className="mx-4">
-      <h1 className="text-center text-[38px] font-bold">
-        Investir de forma mais inteligente passa por aqui.
-      </h1>
-      <p className="mt-[24px] text-center text-lg font-semibold opacity-70">
-        Fazemos de tudo para que você possa conquistar seus sonhos da melhor
-        forma
-      </p>
+    <div>
+      <div className="md:w-11/12">
+        <h1 className="text-center text-[38px] font-bold md:text-left">
+          Investir de forma mais inteligente passa por aqui.
+        </h1>
+        <p className="mt-[24px] text-center text-lg font-semibold opacity-70 md:text-left">
+          Fazemos de tudo para que você possa conquistar seus sonhos da melhor
+          forma
+        </p>
+      </div>
 
       <div className="mt-[32px] flex w-full justify-center">
         <Button
