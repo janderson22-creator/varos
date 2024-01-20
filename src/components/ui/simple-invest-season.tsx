@@ -111,7 +111,7 @@ const SimpleInvest = () => {
           ))}
         </div>
 
-        <div className="w-7/12 mt-10" ref={walletSelectRef}>
+        <div className="nd:w-7/12 mt-10" ref={walletSelectRef}>
           <WalletSelect option={subOptionSelected} />
         </div>
       </div>

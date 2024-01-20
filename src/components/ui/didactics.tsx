@@ -6,6 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import Men from "./men";
 
 const Didactics = () => {
   const { theme } = useTheme();
@@ -15,37 +16,45 @@ const Didactics = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center">
-        <h2 className="text-center text-[24px] font-semibold">
+      <div className="flex flex-col items-center md:w-6/12 md:items-start md:pl-4">
+        <h2 className="text-center text-[24px] font-semibold md:text-left">
           Didática de verdade
         </h2>
-        <p className="mt-2 text-center text-sm font-semibold opacity-70">
+        <p className="mt-2 text-center text-sm font-semibold opacity-70 md:text-left">
           Garantindo seu aprendizado
         </p>
       </div>
 
-      <Carousel
-        plugins={[plugin.current]}
-        className="mt-[54px] w-full"
-        onMouseEnter={plugin.current.stop}
-        onMouseLeave={plugin.current.reset}
-      >
-        <CarouselContent className="mx-4">
-          {comments.map((comment, index) => (
-            <CarouselItem
-              className={cn(
-                "items-left mr-2 flex h-[360px] max-h-[360px] min-h-[360px] flex-col justify-center rounded-[24px] p-6",
-                theme === "light" ? "bg-[#cfd4d758]" : "bg-[#131516]",
-              )}
-              key={index}
-            >
-              <Image src={Aspas} alt={""} />
-              <p className="mt-4 text-left text-lg text-[#B0B7BE]">{comment}</p>
-              <p className="mt-4 text-lg font-medium">Assinante VAROS</p>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      <div className="w-full flex flex-col md:flex-row">
+        <Carousel
+          plugins={[plugin.current]}
+          className="mt-[54px] w-full md:w-6/12"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+        >
+          <CarouselContent className="mx-4">
+            {comments.map((comment, index) => (
+              <CarouselItem
+                className={cn(
+                  "items-left mr-2 flex h-[360px] max-h-[360px] min-h-[360px] flex-col justify-center rounded-[24px] p-6",
+                  theme === "light" ? "bg-[#cfd4d758]" : "bg-[#131516]",
+                )}
+                key={index}
+              >
+                <Image src={Aspas} alt={""} />
+                <p className="mt-4 text-left text-lg text-[#B0B7BE]">
+                  {comment}
+                </p>
+                <p className="mt-4 text-lg font-medium">Assinante VAROS</p>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+
+        <div className="mt-[24px] px-4 md:w-full">
+          <Men />
+        </div>
+      </div>
     </div>
   );
 };
