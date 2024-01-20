@@ -16,6 +16,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        redHat: ["var(--font-red-hat-display)"]
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

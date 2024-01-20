@@ -9,7 +9,12 @@ const FooterList: React.FC<Props> = ({ title, list }) => {
       <p className="text-lg font-bold">{title}</p>
 
       {list.map((item, index) => (
-        <div className="my-5 font-medium text-xs opacity-90" key={index}>{item}</div>
+        <div
+          className="my-5 cursor-pointer text-xs font-medium opacity-90 hover:underline"
+          key={index}
+        >
+          {item}
+        </div>
       ))}
     </div>
   );
