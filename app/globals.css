@@ -84,7 +84,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground h-full;
+    @apply bg-background text-foreground h-full max-w-[1280px] mx-auto;
   }
   html {
     @apply h-full;

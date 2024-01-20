@@ -33,7 +33,7 @@ const OptionSelected: React.FC<Props> = ({
         <div
           onClick={() => click(option)}
           className={cn(
-            "my-2 flex w-fit items-center gap-2 md:gap-4 rounded-[32px] px-4 py-4",
+            "cursor-pointer my-2 flex w-fit items-center gap-2 md:gap-4 rounded-[32px] px-4 py-4",
             option.name === optionSelected?.name && "bg-[#22272980]",
           )}
           key={key}

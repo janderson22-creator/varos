@@ -24,7 +24,7 @@ const BuyNow = () => {
 
   return (
     <div>
-      <div className="md:w-11/12">
+      <div className="md:w-11/12 lg:w-8/12">
         <h1 className="text-center text-[38px] font-bold md:text-left">
           Investir de forma mais inteligente passa por aqui.
         </h1>
@@ -34,10 +34,10 @@ const BuyNow = () => {
         </p>
       </div>
 
-      <div className="mt-[32px] flex w-full justify-center">
+      <div className="mt-[32px] flex w-full justify-center lg:justify-start">
         <Button
           className={cn(
-            "gap-2",
+            "gap-2 lg:rounded-[48px]",
             theme === "light"
               ? "text-[#00F700]"
               : "bg-[#19C81966] text-[#00F700]",
@@ -47,7 +47,7 @@ const BuyNow = () => {
         </Button>
       </div>
 
-      <div className="mt-[72px] flex items-center justify-between rounded-[24px] border py-4 pl-[46px] pr-4">
+      <div className="mt-[72px] flex items-center justify-between rounded-[24px] border py-4 pl-[46px] pr-4 lg:w-8/12">
         <p className="w-full text-xl font-normal opacity-60">Visto em</p>
         <Carousel
           plugins={[plugin.current]}

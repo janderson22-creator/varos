@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/ui/header";
 import AppProvider from "@/context";
 import { Toaster } from "@/components/ui/toaster";
+import HeaderWeb from "@/components/ui/header-web";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               <Header />
+              <HeaderWeb />
               {children}
               <Toaster />
             </ThemeProvider>

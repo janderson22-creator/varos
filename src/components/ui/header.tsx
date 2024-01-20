@@ -10,7 +10,7 @@ import NavBar from "./modal-nav-mobile";
 
 const Header = () => {
   return (
-    <div className="flex items-center justify-between rounded-[0px] px-7 py-4">
+    <div className="flex items-center justify-between rounded-[0px] px-7 py-4 lg:hidden">
       <ModeToggle />
 
       <Link href="/">
@@ -19,7 +19,7 @@ const Header = () => {
 
       <Sheet>
         <SheetTrigger asChild>
-          <Button size="icon" variant="outline">
+          <Button className="border-none" size="icon" variant="outline">
             <MenuIcon />
           </Button>
         </SheetTrigger>
